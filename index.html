@@ -41,48 +41,21 @@
 
     .aurora-blob {
       position: absolute;
+      width: 700px;
+      height: 450px;
       border-radius: 50%;
-      filter: blur(80px);
-      opacity: 0;
-      animation: auroraBreath 12s ease-in-out infinite;
-    }
-
-    .aurora-blob:nth-child(1) {
-      width: 600px;
-      height: 400px;
-      background: radial-gradient(ellipse, rgba(99, 102, 241, 0.35) 0%, transparent 70%);
-      top: 20%;
-      left: 25%;
-      animation-delay: 0s;
-      animation-duration: 8s;
-    }
-
-    .aurora-blob:nth-child(2) {
-      width: 500px;
-      height: 350px;
-      background: radial-gradient(ellipse, rgba(139, 92, 246, 0.3) 0%, transparent 70%);
-      top: 30%;
-      right: 20%;
-      animation-delay: -5s;
-      animation-duration: 10s;
-    }
-
-    .aurora-blob:nth-child(3) {
-      width: 400px;
-      height: 300px;
-      background: radial-gradient(ellipse, rgba(56, 189, 248, 0.15) 0%, transparent 70%);
-      bottom: 25%;
-      left: 35%;
-      animation-delay: -9s;
-      animation-duration: 13s;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%) scale(1);
+      background: radial-gradient(ellipse, rgba(99, 102, 241, 0.3) 0%, rgba(139, 92, 246, 0.15) 40%, transparent 70%);
+      filter: blur(70px);
+      animation: auroraBreath 8s ease-in-out infinite;
     }
 
     @keyframes auroraBreath {
-      0%   { opacity: 0;    transform: translate(0, 0) scale(1); }
-      25%  { opacity: 1;    transform: translate(3%, -4%) scale(1.05); }
-      50%  { opacity: 0.7;  transform: translate(-3%, 3%) scale(0.97); }
-      75%  { opacity: 1;    transform: translate(2%, 2%) scale(1.03); }
-      100% { opacity: 0;    transform: translate(0, 0) scale(1); }
+      0%   { opacity: 0.4; transform: translate(-50%, -50%) scale(1); }
+      50%  { opacity: 0.9; transform: translate(-50%, -52%) scale(1.08); }
+      100% { opacity: 0.4; transform: translate(-50%, -50%) scale(1); }
     }
 
     .logo {
@@ -147,8 +120,6 @@
 <body>
   <div class="aurora">
     <div class="aurora-blob"></div>
-    <div class="aurora-blob"></div>
-    <div class="aurora-blob"></div>
   </div>
   <div class="grain"></div>
   <main class="content">
@@ -157,5 +128,17 @@
     <div class="divider" style="margin-top: 2rem;"></div>
     <p class="coming-soon">Coming Soon</p>
   </main>
+  <script>
+    function alignBlob() {
+      const logo = document.querySelector('.logo');
+      const blob = document.querySelector('.aurora-blob');
+      const rect = logo.getBoundingClientRect();
+      const logoCenter = rect.top + rect.height / 2;
+      const pct = (logoCenter / window.innerHeight) * 100;
+      blob.style.top = pct + '%';
+    }
+    window.addEventListener('load', alignBlob);
+    window.addEventListener('resize', alignBlob);
+  </script>
 </body>
 </html>
