@@ -30,17 +30,59 @@
       overflow: hidden;
     }
 
-    /* Subtle radial glow */
-    body::before {
-      content: '';
+    /* Aurora glow */
+    .aurora {
       position: fixed;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -60%);
-      width: 800px;
-      height: 500px;
-      background: radial-gradient(ellipse at center, rgba(99, 102, 241, 0.12) 0%, transparent 70%);
+      inset: 0;
       pointer-events: none;
+      overflow: hidden;
+      z-index: 0;
+    }
+
+    .aurora-blob {
+      position: absolute;
+      border-radius: 50%;
+      filter: blur(80px);
+      opacity: 0;
+      animation: auroraBreath 12s ease-in-out infinite;
+    }
+
+    .aurora-blob:nth-child(1) {
+      width: 600px;
+      height: 400px;
+      background: radial-gradient(ellipse, rgba(99, 102, 241, 0.35) 0%, transparent 70%);
+      top: 20%;
+      left: 25%;
+      animation-delay: 0s;
+      animation-duration: 8s;
+    }
+
+    .aurora-blob:nth-child(2) {
+      width: 500px;
+      height: 350px;
+      background: radial-gradient(ellipse, rgba(139, 92, 246, 0.3) 0%, transparent 70%);
+      top: 30%;
+      right: 20%;
+      animation-delay: -5s;
+      animation-duration: 10s;
+    }
+
+    .aurora-blob:nth-child(3) {
+      width: 400px;
+      height: 300px;
+      background: radial-gradient(ellipse, rgba(56, 189, 248, 0.15) 0%, transparent 70%);
+      bottom: 25%;
+      left: 35%;
+      animation-delay: -9s;
+      animation-duration: 13s;
+    }
+
+    @keyframes auroraBreath {
+      0%   { opacity: 0;    transform: translate(0, 0) scale(1); }
+      25%  { opacity: 1;    transform: translate(3%, -4%) scale(1.05); }
+      50%  { opacity: 0.7;  transform: translate(-3%, 3%) scale(0.97); }
+      75%  { opacity: 1;    transform: translate(2%, 2%) scale(1.03); }
+      100% { opacity: 0;    transform: translate(0, 0) scale(1); }
     }
 
     .logo {
@@ -57,7 +99,7 @@
     }
 
     .tagline {
-      font-size: 1.1rem;
+      font-size: 1.35rem;
       font-weight: 300;
       letter-spacing: 0.04em;
       color: rgba(232, 234, 240, 0.65);
@@ -86,6 +128,8 @@
     .content {
       text-align: center;
       animation: fadeUp 1.2s cubic-bezier(0.16, 1, 0.3, 1) both;
+      position: relative;
+      z-index: 1;
     }
 
     @keyframes fadeUp {
@@ -101,6 +145,11 @@
   </style>
 </head>
 <body>
+  <div class="aurora">
+    <div class="aurora-blob"></div>
+    <div class="aurora-blob"></div>
+    <div class="aurora-blob"></div>
+  </div>
   <div class="grain"></div>
   <main class="content">
     <h1><img src="AUGMENTIX white  transap.png" alt="Augmentix" class="logo" /></h1>
