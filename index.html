@@ -133,7 +133,7 @@
       const logo = document.querySelector('.logo');
       const blob = document.querySelector('.aurora-blob');
       const rect = logo.getBoundingClientRect();
-      const logoCenter = rect.top + rect.height / 2;
+      const logoCenter = rect.top + rect.height * 0.35;
       const pct = (logoCenter / window.innerHeight) * 100;
       blob.style.top = pct + '%';
     }
