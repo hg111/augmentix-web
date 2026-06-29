@@ -62,6 +62,51 @@
       width: clamp(280px, 55vw, 700px);
       height: auto;
       display: block;
+      position: relative;
+    }
+
+    .logo-wrap {
+      position: relative;
+      display: inline-block;
+      overflow: visible;
+    }
+
+    .logo-wrap::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 50%;
+      width: 100vw;
+      height: 100%;
+      background:
+        linear-gradient(to bottom,
+          transparent 0%,
+          rgba(60, 100, 255, 0.08) 26.3%,
+          rgba(100, 140, 255, 0.35) 36.3%,
+          rgba(180, 210, 255, 0.6) 40.3%,
+          rgba(255, 255, 255, 1) 41.05%,
+          rgba(255, 255, 255, 1) 41.55%,
+          rgba(180, 210, 255, 0.6) 42.3%,
+          rgba(100, 140, 255, 0.35) 46.3%,
+          rgba(60, 100, 255, 0.08) 56.3%,
+          transparent 100%
+        );
+      mix-blend-mode: screen;
+      filter: blur(1.5px);
+      opacity: 0;
+      transform: translateX(-50%) scaleX(0);
+      transform-origin: center 41.3%;
+      animation: lensFlare 5s linear infinite;
+      pointer-events: none;
+    }
+
+    @keyframes lensFlare {
+      0%   { opacity: 0;   transform: translateX(-50%) scaleX(0)    scaleY(1.8); }
+      1%   { opacity: 1;   transform: translateX(-50%) scaleX(0.01) scaleY(1.8); }
+      7%   { opacity: 1;   transform: translateX(-50%) scaleX(1)    scaleY(0.4); }
+      10%  { opacity: 0;   transform: translateX(-50%) scaleX(1)    scaleY(0.4); }
+      11%  { opacity: 0;   transform: translateX(-50%) scaleX(0)    scaleY(1.8); }
+      100% { opacity: 0;   transform: translateX(-50%) scaleX(0)    scaleY(1.8); }
     }
 
     .divider {
@@ -123,7 +168,7 @@
   </div>
   <div class="grain"></div>
   <main class="content">
-    <h1><img src="AUGMENTIX white  transap.png" alt="Augmentix" class="logo" /></h1>
+    <h1><div class="logo-wrap"><img src="AUGMENTIX white  transap.png" alt="Augmentix" class="logo" /></div></h1>
     <p class="tagline">Intelligence, built in.</p>
     <div class="divider" style="margin-top: 2rem;"></div>
     <p class="coming-soon">Coming Soon</p>
