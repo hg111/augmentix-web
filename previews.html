@@ -51,18 +51,22 @@
   #gate .err { color: #ff7a7a; font-size: 13px; margin-top: 10px;
                visibility: hidden; }
 
-  /* ---- gallery ---- */
+  /* ---- gallery: full-bleed cinema ---- */
   #gallery { display: none; }
-  .card {
-    background: var(--panel); border: 1px solid var(--line);
-    border-radius: 14px; overflow: hidden; margin-bottom: 32px;
+  body.cinema { background: #000; }
+  body.cinema .glow { display: none; }
+  body.cinema .wrap { max-width: none; padding: 24px 0 0; }
+  body.cinema header, body.cinema .sub { padding: 0 32px; }
+  .card { margin-bottom: 48px; }
+  .card video {
+    display: block; background: #000;
+    width: 100%; max-height: 86vh; object-fit: contain;
   }
-  .card video { display: block; width: 100%; height: auto; background: #000; }
-  .card .meta { padding: 16px 20px; }
+  .card .meta { padding: 14px 32px 0; max-width: 900px; }
   .card .meta h2 { font-size: 16px; font-weight: 600; margin-bottom: 4px; }
   .card .meta p { color: var(--dim); font-size: 13px; line-height: 1.5; }
   footer { color: var(--dim); font-size: 12px; text-align: center;
-           padding: 24px 0 8px; }
+           padding: 24px 0 16px; }
 </style>
 </head>
 <body>
@@ -88,9 +92,11 @@
              src="assets/previews/vtwin_turntable_f93d2757.mp4"></video>
       <div class="meta">
         <h2>V-Twin engine — automated turntable</h2>
-        <p>Rendered fully automatically from the raw STEP file: tessellation,
-           per-part material assignment, lighting, camera and animation —
-           no manual scene setup. AutoRender pipeline, first milestone.</p>
+        <p>The CAD geometry of this V-twin engine — 605 parts — was
+           reconstructed in 17.2 seconds without human touch. Materials and
+           textures, lighting, camera and animation were then assigned fully
+           automatically: no manual scene setup at any stage. AutoRender
+           pipeline, first milestone.</p>
       </div>
     </div>
 
@@ -109,6 +115,7 @@
   function unlock() {
     document.getElementById("gate").style.display = "none";
     document.getElementById("gallery").style.display = "block";
+    document.body.classList.add("cinema");
   }
   async function check() {
     const v = document.getElementById("pw").value.trim();
