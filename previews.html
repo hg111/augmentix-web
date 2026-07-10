@@ -64,7 +64,7 @@
   }
   .card .meta { padding: 14px 32px 0; max-width: 900px; }
   .card .meta h2 { font-size: 16px; font-weight: 600; margin-bottom: 4px; }
-  .card .meta p { color: var(--dim); font-size: 13px; line-height: 1.5; }
+  .card .meta p { color: var(--dim); font-size: 15px; line-height: 1.6; }
   footer { color: var(--dim); font-size: 12px; text-align: center;
            padding: 24px 0 16px; }
 </style>
@@ -129,6 +129,15 @@
     document.getElementById("gate").style.display = "none";
     document.getElementById("gallery").style.display = "block";
     document.body.classList.add("cinema");
+    const isTouchDevice = window.matchMedia('(hover: none)').matches;
+    document.querySelectorAll('.card video').forEach(v => {
+      if (isTouchDevice) {
+        v.addEventListener('click', () => v.paused ? v.play() : v.pause());
+      } else {
+        v.addEventListener('mouseenter', () => v.play());
+        v.addEventListener('mouseleave', () => v.pause());
+      }
+    });
   }
   async function check() {
     const v = document.getElementById("pw").value.trim();
@@ -142,6 +151,7 @@
     }
   }
   if (sessionStorage.getItem("agx_previews") === "1") unlock();
+
 </script>
 </body>
 </html>
